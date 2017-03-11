@@ -3,6 +3,7 @@ package jlsa.sorting.view;
 import java.util.ArrayList;
 import java.util.Observable;
 import javafx.scene.text.Text;
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import jlsa.sorting.model.DataManager;
@@ -45,12 +46,14 @@ public class ChartView extends BaseView {
 			int barWidth = width / data.size() - 2;
 			int barHeight = (int) Math.round(height * data.get(i) / getMax()) - 0;
 			
+			Point2D dimensions = new Point2D(barWidth, barHeight - 10);
+			Point2D position = new Point2D(xLeft, height - barHeight + 10);
 			Text numberText = new Text(xLeft + barWidth/2, height - (barHeight + 5), data.get(i).toString());
 			getChildren().add(numberText);
 			if (highlightedBars.contains(i)) {
-				drawOneBar(xLeft, height - barHeight + 10, barWidth, barHeight - 10, true);
+				drawOneBar(position, dimensions, true);
 			} else {
-				drawOneBar(xLeft, height - barHeight + 10, barWidth, barHeight - 10);
+				drawOneBar(position, dimensions);
 			}
 			xLeft = xRight;
 		}
@@ -70,12 +73,12 @@ public class ChartView extends BaseView {
 		return max;
 	}
 	
-	private void drawOneBar(int x, int y, int w, int h) {
-		drawOneBar(x, y, w, h, false);
+	private void drawOneBar(Point2D position, Point2D dimensions) {
+		drawOneBar(position, dimensions, false);
 	}
 	
-	private void drawOneBar(int x, int y, int w, int h, boolean currentIndex) {
-		Rectangle bar = new Rectangle(x, y, w, h);
+	private void drawOneBar(Point2D position, Point2D dimensions, boolean currentIndex) {
+		Rectangle bar = new Rectangle(position.getX(), position.getY(), dimensions.getX(), dimensions.getY());
 		if (!currentIndex)
 			bar.setFill(Color.DIMGRAY);
 		else
