@@ -9,6 +9,7 @@ public class BubbleSort extends AbstractSort {
 	
 	public BubbleSort(ArrayList<Integer> data) {
 		super(data);
+		this.setName("bubble-sort");
 		this.data = reset(data);
 	}
 	
@@ -72,7 +73,8 @@ public class BubbleSort extends AbstractSort {
 		return data;
 	}
 
-	public int getNextIndex() {
+	@Override
+	public int getSecondIndex() {
 		return currentIndex + noSwaps;
 	}
 	

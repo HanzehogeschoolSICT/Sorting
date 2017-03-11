@@ -37,18 +37,23 @@ public class ChartView extends BaseView {
 	}
 	
 	private void renderChart() {
-		int height = heightProperty().intValue() - 1;
-		int width = widthProperty().intValue() - 1;
+		double height = (heightProperty().doubleValue() * 0.88);
+		double heightOffset = (heightProperty().doubleValue() * 0.12);
+		int width = widthProperty().intValue() - 21;
 		
 		int xLeft = 2;
 		for (int i = 0; i < data.size(); i++) {
 			int xRight = width * (i + 1) / data.size() + 2;
 			int barWidth = width / data.size() - 2;
-			int barHeight = (int) Math.round(height * data.get(i) / getMax()) - 0;
+			int barHeight = (int) Math.round(height * data.get(i) / getMax());
 			
 			Point2D dimensions = new Point2D(barWidth, barHeight - 10);
-			Point2D position = new Point2D(xLeft, height - barHeight + 10);
-			Text numberText = new Text(xLeft + barWidth/2, height - (barHeight + 5), data.get(i).toString());
+			Point2D position = new Point2D(xLeft+10, height - barHeight + heightOffset);
+			Text numberText = new Text(
+					xLeft + barWidth/2, 
+					height - (barHeight + 5) + heightOffset, 
+					data.get(i).toString()
+					);
 			getChildren().add(numberText);
 			if (highlightedBars.contains(i)) {
 				drawOneBar(position, dimensions, true);

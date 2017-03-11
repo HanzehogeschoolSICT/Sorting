@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 public class AbstractSort {
 	
+	private String name;
 	protected int currentIndex;
 	protected ArrayList<Integer> data;
 	
 	public AbstractSort(ArrayList<Integer> data) {
 		this.data = data;
+		this.name = "abstract-sort";
 	}
 	
 	public ArrayList<Integer> reset(ArrayList<Integer> data) {
@@ -37,5 +39,17 @@ public class AbstractSort {
 	
 	public int getCurrentIndex() {
 		return currentIndex;
+	}
+	
+	public int getSecondIndex() {
+		return currentIndex;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 }
