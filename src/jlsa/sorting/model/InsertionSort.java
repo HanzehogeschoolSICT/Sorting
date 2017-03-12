@@ -8,7 +8,7 @@ public class InsertionSort extends AbstractSort {
 	
 	public InsertionSort(ArrayList<Integer> data) {
 		super(data);
-		this.setName("insertion-sort");
+		this.setName("Insertion Sort");
 		this.data = reset(data);
 	}
 

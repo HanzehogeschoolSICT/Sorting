@@ -9,7 +9,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import jlsa.sorting.controller.App;
-import jlsa.sorting.model.BubbleSort;
 import jlsa.sorting.model.DataManager;
 import javafx.scene.layout.BorderPane;
 import jlsa.sorting.model.AbstractSort;
@@ -17,10 +16,7 @@ import jlsa.sorting.model.AutoSortThread;
 import jlsa.scene.control.NumberTextField;
 import jlsa.sorting.model.RandomDataGenerator;
 
-public class ApplicationView extends BaseView {
-	
-	private int dataSize = 20;
-	
+public class ApplicationView extends BaseView {	
 	private AbstractSort sort;
 	private ChartView chart;
 	private DataManager dataManager;
@@ -121,7 +117,7 @@ public class ApplicationView extends BaseView {
 		Button btnReset = new Button("Reset");
 		btnReset.setPrefSize(100, 20);
 		btnReset.setOnMouseClicked(e -> {
-			ArrayList<Integer> newData = RandomDataGenerator.randomData(dataSize);
+			ArrayList<Integer> newData = RandomDataGenerator.randomData(app.getDataSize());
 			render(newData);
 			sort.reset(newData);
 			if (autoSortThread != null) {

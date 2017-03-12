@@ -9,7 +9,7 @@ public class BubbleSort extends AbstractSort {
 	
 	public BubbleSort(ArrayList<Integer> data) {
 		super(data);
-		this.setName("bubble-sort");
+		this.setName("Bubble Sort");
 		this.data = reset(data);
 	}
 	

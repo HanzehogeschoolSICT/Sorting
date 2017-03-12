@@ -3,6 +3,7 @@ package jlsa.sorting.controller;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.util.ArrayList;
+import jlsa.sorting.model.QuickSort;
 import jlsa.sorting.model.BubbleSort;
 import jlsa.sorting.model.DataManager;
 import javafx.application.Application;
@@ -24,7 +25,8 @@ public class App extends Application {
 		dataManager = new DataManager();
 		dataManager.setData(RandomDataGenerator.randomData(dataSize));
 //		sort = new BubbleSort(dataManager.getData());
-		sort = new InsertionSort(dataManager.getData());
+//		sort = new InsertionSort(dataManager.getData());
+		sort = new QuickSort(dataManager.getData());
 		appView = new ApplicationView(dataManager, this);
 		stage.setTitle("Sorting Assignment");
 		stage.setScene(setupScene());
@@ -43,5 +45,9 @@ public class App extends Application {
 
 	public void render(ArrayList<Integer> data) {
 		appView.render(data);
+	}
+	
+	public int getDataSize() {
+		return dataSize;
 	}
 }
