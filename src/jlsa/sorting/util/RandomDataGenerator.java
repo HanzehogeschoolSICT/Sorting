@@ -1,4 +1,4 @@
-package jlsa.sorting.model;
+package jlsa.sorting.util;
 
 import java.util.Random;
 import java.util.ArrayList;

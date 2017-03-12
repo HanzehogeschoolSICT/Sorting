@@ -1,7 +1,7 @@
 package jlsa.sorting.model;
 
 import java.util.ArrayList;
-
+import jlsa.sorting.util.GenericStack;
 /*
  * Iterative Quicksort code based on code from geeksforgeeks.org
  * http://www.geeksforgeeks.org/iterative-quick-sort/
@@ -12,11 +12,13 @@ public class QuickSort extends AbstractSort {
 	private int left;
 	private int right;
 	private int[] stack;
+	private GenericStack<Integer> stack2;
 	private int top;
 
 	public QuickSort(ArrayList<Integer> data) {
 		super(data);
 		this.setName("Quick Sort");
+		stack2 = new GenericStack<Integer>();
 		reset(data);
 	}
 
@@ -27,15 +29,20 @@ public class QuickSort extends AbstractSort {
 		right = data.size() - 1;
 		top = -1;
 		stack = new int[right - left + 1];
-		// push initial values in the stack
-		stack[++top] = left;
-		stack[++top] = right;
+		stack2.clear();
+		stack2.push(left);
+		stack2.push(right);
+//		++top;
+//		++top;
+//		// push initial values in the stack
+//		stack[++top] = left;
+//		stack[++top] = right;
 		return data;
 	}
 
 	@Override
 	public boolean isDone() {
-		return top == -1;
+		return stack2.getSize() == 0;//top == -1;
 	}
 
 	int partition(ArrayList<Integer> data, int left, int right) {
@@ -58,8 +65,10 @@ public class QuickSort extends AbstractSort {
 	public ArrayList<Integer> step() {
 		if (!isDone()) {
 			// pop right and left
-			right = stack[top--];
-			left = stack[top--];
+			right = stack2.pop();//stack[top--];
+			left = stack2.pop();//stack[top--];
+//			right = stack[top--];
+//			left = stack[top--];
 
 			// set pivot element at it's proper position
 			int p = partition(data, left, right);
@@ -67,15 +76,19 @@ public class QuickSort extends AbstractSort {
 			// if there are elements on the left side of pivot,
 			// then push left side to stack
 			if (p - 1 > left) {
-				stack[++top] = left;
-				stack[++top] = p - 1;
+				stack2.push(left);
+				stack2.push(p-1);
+//				stack[++top] = left;
+//				stack[++top] = p - 1;
 			}
 
 			// if there are elements on the right side of pivot,
 			// then push right side to stack
 			if (p + 1 < right) {
-				stack[++top] = p + 1;
-				stack[++top] = right;
+				stack2.push(p+1);
+				stack2.push(right);
+//				stack[++top] = p + 1;
+//				stack[++top] = right;
 			}
 		}
 

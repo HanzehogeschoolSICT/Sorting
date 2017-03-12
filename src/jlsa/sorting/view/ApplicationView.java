@@ -10,11 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import jlsa.sorting.controller.App;
 import jlsa.sorting.model.DataManager;
+import jlsa.sorting.util.RandomDataGenerator;
 import javafx.scene.layout.BorderPane;
 import jlsa.sorting.model.AbstractSort;
 import jlsa.sorting.model.AutoSortThread;
 import jlsa.scene.control.NumberTextField;
-import jlsa.sorting.model.RandomDataGenerator;
 
 public class ApplicationView extends BaseView {	
 	private AbstractSort sort;
@@ -33,7 +33,7 @@ public class ApplicationView extends BaseView {
 	}
 	
 	public void init() {
-		sort = app.getSorter();//new BubbleSort(dataManager.getData());
+		sort = app.getSorter();
 		chart = new ChartView(dataManager);
 		render(dataManager.getData());
 		autoSortThread = new AutoSortThread(sort, app);
@@ -76,25 +76,11 @@ public class ApplicationView extends BaseView {
 		hbox.getChildren().addAll(lbl, ntfDelay);
 	}
 	
-	public HBox addHBox() {
-		HBox hbox = new HBox();
-		hbox.setPadding(new Insets(15, 12, 15, 12));
-		hbox.setSpacing(10);
+	private Button addPlayButton() {
+		Button btn = new Button("Play");
+		btn.setPrefSize(100, 20);
 		
-		Button btnStep = new Button("Step");
-		btnStep.setPrefSize(100, 20);
-		
-		btnStep.setOnMouseClicked(e -> {
-			render(sort.step());
-			if (autoSortThread != null) {
-				autoSortThread.setRunning(false);
-			}
-		});
-		
-		Button btnPlay = new Button("Play");
-		btnPlay.setPrefSize(100, 20);
-		
-		btnPlay.setOnMouseClicked(e -> {
+		btn.setOnMouseClicked(e -> {
 			if (autoSortThread == null) {
 				autoSortThread = new AutoSortThread(sort, app);
 				autoSortThread.start();
@@ -106,17 +92,39 @@ public class ApplicationView extends BaseView {
 			}
 		});
 		
-		Button btnPause = new Button("Pause");
-		btnPause.setPrefSize(100, 20);
-		btnPause.setOnMouseClicked(e -> {
+		return btn;
+	}
+	
+	private Button addStepButton() {
+		Button btn = new Button("Step");
+		btn.setPrefSize(100, 20);
+		
+		btn.setOnMouseClicked(e -> {
+			render(sort.step());
 			if (autoSortThread != null) {
 				autoSortThread.setRunning(false);
 			}
 		});
 		
-		Button btnReset = new Button("Reset");
-		btnReset.setPrefSize(100, 20);
-		btnReset.setOnMouseClicked(e -> {
+		return btn;
+	}
+	
+	private Button addPauseButton() {
+		Button btn = new Button("Pause");
+		btn.setPrefSize(100, 20);
+		btn.setOnMouseClicked(e -> {
+			if (autoSortThread != null) {
+				autoSortThread.setRunning(false);
+			}
+		});
+		
+		return btn;
+	}
+	
+	private Button addResetButton() {
+		Button btn = new Button("Reset");
+		btn.setPrefSize(100, 20);
+		btn.setOnMouseClicked(e -> {
 			ArrayList<Integer> newData = RandomDataGenerator.randomData(app.getDataSize());
 			render(newData);
 			sort.reset(newData);
@@ -127,14 +135,31 @@ public class ApplicationView extends BaseView {
 			}
 		});
 		
-		Button btnInstant = new Button("Instant");
-		btnInstant.setPrefSize(100, 20);
-		btnInstant.setOnMouseClicked(e -> {
+		return btn;
+	}
+	
+	private Button addInstantButton() {
+		Button btn = new Button("Instant");
+		btn.setPrefSize(100, 20);
+		btn.setOnMouseClicked(e -> {
 			ArrayList<Integer> newData = sort.getSorted();
 			dataManager.setData(newData);
 		});
 		
-		hbox.getChildren().addAll(btnStep, btnPlay, btnPause, btnReset, btnInstant);
+		return btn;
+	}
+	
+	public HBox addHBox() {
+		HBox hbox = new HBox();
+		hbox.setPadding(new Insets(15, 12, 15, 12));
+		hbox.setSpacing(10);
+		
+		hbox.getChildren().addAll(
+				addStepButton(), 
+				addPlayButton(), 
+				addPauseButton(), 
+				addResetButton(), 
+				addInstantButton());
 		
 		return hbox;
 	}

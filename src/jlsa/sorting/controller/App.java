@@ -4,13 +4,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import jlsa.sorting.model.QuickSort;
+import jlsa.sorting.util.RandomDataGenerator;
 import jlsa.sorting.model.BubbleSort;
 import jlsa.sorting.model.DataManager;
 import javafx.application.Application;
 import jlsa.sorting.model.AbstractSort;
 import jlsa.sorting.model.InsertionSort;
 import jlsa.sorting.view.ApplicationView;
-import jlsa.sorting.model.RandomDataGenerator;
 
 public class App extends Application {
 	
