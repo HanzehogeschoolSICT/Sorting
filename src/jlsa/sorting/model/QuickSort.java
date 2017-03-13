@@ -11,13 +11,12 @@ public class QuickSort extends AbstractSort {
 	
 	private int left;
 	private int right;
-	private int pivotIndex;
-	private GenericStack<Integer> stack2;
+	private GenericStack<Integer> stack;
 
 	public QuickSort(ArrayList<Integer> data) {
 		super(data);
 		this.setName("Quick Sort");
-		stack2 = new GenericStack<Integer>();
+		stack = new GenericStack<Integer>();
 		reset(data);
 	}
 
@@ -26,21 +25,20 @@ public class QuickSort extends AbstractSort {
 		currentIndex = 0;
 		left = 0;
 		right = data.size() - 1;
-		stack2.clear();
+		stack.clear();
 
 		// push initial values in the stack
-		stack2.push(left);
-		stack2.push(right);
+		stack.push(left);
+		stack.push(right);
 		return data;
 	}
 
 	@Override
 	public boolean isDone() {
-		return stack2.getSize() == 0;
+		return stack.getSize() == 0;
 	}
 
 	int partition(ArrayList<Integer> data, int left, int right) {
-		pivotIndex = right;
 		int pivot = data.get(right);
 		int i = (left - 1);
 
@@ -53,6 +51,7 @@ public class QuickSort extends AbstractSort {
 		}
 
 		swap(i + 1, right);
+		
 		return i + 1;
 	}
 
@@ -60,8 +59,8 @@ public class QuickSort extends AbstractSort {
 	public ArrayList<Integer> step() {
 		if (!isDone()) {
 			// pop right and left
-			right = stack2.pop();
-			left = stack2.pop();
+			right = stack.pop();
+			left = stack.pop();
 
 			// set pivot element at it's proper position
 			int p = partition(data, left, right);
@@ -69,15 +68,15 @@ public class QuickSort extends AbstractSort {
 			// if there are elements on the left side of pivot,
 			// then push left side to stack
 			if (p - 1 > left) {
-				stack2.push(left);
-				stack2.push(p-1);
+				stack.push(left);
+				stack.push(p-1);
 			}
 
 			// if there are elements on the right side of pivot,
 			// then push right side to stack
 			if (p + 1 < right) {
-				stack2.push(p+1);
-				stack2.push(right);
+				stack.push(p+1);
+				stack.push(right);
 			}
 		}
 
