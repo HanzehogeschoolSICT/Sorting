@@ -10,11 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import jlsa.sorting.controller.App;
 import jlsa.sorting.model.DataManager;
-import jlsa.sorting.util.RandomDataGenerator;
 import javafx.scene.layout.BorderPane;
 import jlsa.sorting.model.AbstractSort;
 import jlsa.sorting.model.AutoSortThread;
 import jlsa.scene.control.NumberTextField;
+import jlsa.sorting.util.RandomDataGenerator;
 
 public class ApplicationView extends BaseView {	
 	private AbstractSort sort;
