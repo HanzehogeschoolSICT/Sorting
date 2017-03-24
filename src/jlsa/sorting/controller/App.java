@@ -26,8 +26,8 @@ public class App extends Application {
 		dataManager.setData(RandomDataGenerator.randomData(dataSize));
 		
 		// Which sorter should be used.
-//		sort = new BubbleSort(dataManager.getData());
-		sort = new InsertionSort(dataManager.getData());
+		sort = new BubbleSort(dataManager.getData());
+//		sort = new InsertionSort(dataManager.getData());
 //		sort = new QuickSort(dataManager.getData());
 		
 		appView = new ApplicationView(dataManager, this);
