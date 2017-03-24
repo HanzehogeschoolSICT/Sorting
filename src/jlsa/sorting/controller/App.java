@@ -14,7 +14,7 @@ import jlsa.sorting.util.RandomDataGenerator;
 
 public class App extends Application {
 	
-	private int dataSize = 20;
+	private int dataSize = 50;
 	
 	private ApplicationView appView;
 	private AbstractSort sort;
@@ -24,9 +24,12 @@ public class App extends Application {
 	public void start(Stage stage) throws Exception {
 		dataManager = new DataManager();
 		dataManager.setData(RandomDataGenerator.randomData(dataSize));
+		
+		// Which sorter should be used.
 //		sort = new BubbleSort(dataManager.getData());
-//		sort = new InsertionSort(dataManager.getData());
-		sort = new QuickSort(dataManager.getData());
+		sort = new InsertionSort(dataManager.getData());
+//		sort = new QuickSort(dataManager.getData());
+		
 		appView = new ApplicationView(dataManager, this);
 		stage.setTitle("Sorting Assignment");
 		stage.setScene(setupScene());
