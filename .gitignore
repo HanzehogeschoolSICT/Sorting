@@ -105,3 +105,5 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# Maven/Gradle build output
+target/

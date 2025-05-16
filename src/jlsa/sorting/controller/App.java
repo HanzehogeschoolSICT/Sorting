@@ -27,8 +27,8 @@ public class App extends Application {
 		
 		// Which sorter should be used.
 		sort = new BubbleSort(dataManager.getData());
-//		sort = new InsertionSort(dataManager.getData());
-//		sort = new QuickSort(dataManager.getData());
+		// sort = new InsertionSort(dataManager.getData());
+		// sort = new QuickSort(dataManager.getData());
 		
 		appView = new ApplicationView(dataManager, this);
 		stage.setTitle("Sorting Assignment");
